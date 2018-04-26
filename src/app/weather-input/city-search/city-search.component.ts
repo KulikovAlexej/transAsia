@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
-import {startWith} from 'rxjs/operators/startWith';
-import {map} from 'rxjs/operators/map';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { startWith } from 'rxjs/operators/startWith';
+import { map } from 'rxjs/operators/map';
+import { CityService } from '../city-service/cities.service';
 
 @Component({
   selector: 'app-city-search',
@@ -11,17 +12,18 @@ import {map} from 'rxjs/operators/map';
 })
 export class CitySearchComponent implements OnInit {
 
-  constructor() { }
+  constructor( private cityService: CityService) { }
 
 
 
   myControl: FormControl = new FormControl();
 
-  options = []
+  options = [];
 
-   filteredOptions: Observable<string[]>;
+  filteredOptions: Observable<string[]>;
 
   ngOnInit() {
+    this.options = this.cityService.getData();
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
