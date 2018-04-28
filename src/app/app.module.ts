@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CitiesServiceModule } from './weather-input/city-service/cities-service.module';
+import { HttpModule } from '@angular/http';
+// import { CitiesServiceModule } from './weather-input/city-service/cities-service.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -9,6 +10,7 @@ import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
+import { CityService } from './weather-input/city-service/cities.service';
 import { CitySearchComponent } from './weather-input/city-search/city-search.component';
 
 
@@ -20,7 +22,7 @@ import { CitySearchComponent } from './weather-input/city-search/city-search.com
   imports: [
     BrowserModule,
     FormsModule,
-    CitiesServiceModule,
+    HttpModule,
     MatButtonModule, 
     MatCheckboxModule,
     MatAutocompleteModule,
@@ -29,7 +31,7 @@ import { CitySearchComponent } from './weather-input/city-search/city-search.com
     BrowserAnimationsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [CityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

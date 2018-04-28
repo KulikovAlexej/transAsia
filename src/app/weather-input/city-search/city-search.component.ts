@@ -11,29 +11,42 @@ import { CityService } from '../city-service/cities.service';
   styleUrls: ['./city-search.component.css']
 })
 export class CitySearchComponent implements OnInit {
-
+  // query: string = "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cb30165fbee1109708d696ef9dfffd36"
+  // query: string = './assets/data/cities.json';
+  query: string = './assets/data/city.list.json';
+  city: string = '';
+  cityArr: Array<Object> = [];
   constructor( private cityService: CityService) { }
 
 
+  createArray(data){
+    this.cityArr = data;
+  }
 
-  myControl: FormControl = new FormControl();
-
-  options = [];
-
-  filteredOptions: Observable<string[]>;
+  findCity(str: string, arr: Array<any>){
+    let query = str;
+    let newArr: Array<any> = [];
+    console.log(query.length);
+    arr.forEach((object) => {
+      let name = object.name;
+      if(name.indexOf(query) == 0){
+        newArr.push({
+          cityName: object.name,
+          country: object.country,
+          id: object.id 
+        });
+      }
+    })
+    console.log(newArr);
+  }
 
   ngOnInit() {
-    this.options = this.cityService.getData();
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(val => this.filter(val))
-      );
+    this.cityService.getData(this.query).subscribe(
+      data => this.createArray(data),
+      error => console.log(error),
+      () => console.log('Complete')
+    )
+    // this.findCity('La', this.cityArr);
   }
-
-  filter(val: string): string[] {
-    return this.options.filter(option =>
-      option.toLowerCase().indexOf(val.toLowerCase()) === 0);
-  }
-
+    
 }
