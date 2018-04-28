@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import { CityService } from '../city-service/cities.service';
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-city-search',
@@ -14,30 +15,67 @@ export class CitySearchComponent implements OnInit {
   // query: string = "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cb30165fbee1109708d696ef9dfffd36"
   // query: string = './assets/data/cities.json';
   query: string = './assets/data/city.list.json';
-  city: string = '';
+  cityStr: string = '';
   cityArr: Array<Object> = [];
-  constructor( private cityService: CityService) { }
+  currentCityArr: Array<Object> = [];
+  constructor(private cityService: CityService) { }
 
 
-  createArray(data){
+  createArray(data) {
     this.cityArr = data;
   }
 
-  findCity(str: string, arr: Array<any>){
-    let query = str;
+  test() {
+    console.log(this.cityStr);
+  }
+
+  findCity(str: string, arr: Array<any>) {
+    let query = str.toLowerCase();
     let newArr: Array<any> = [];
-    console.log(query.length);
-    arr.forEach((object) => {
-      let name = object.name;
-      if(name.indexOf(query) == 0){
-        newArr.push({
-          cityName: object.name,
-          country: object.country,
-          id: object.id 
-        });
-      }
-    })
-    console.log(newArr);
+    if (query.length > 2) {
+      arr.forEach((object) => {
+        //надо приводить все к маленьким буквам, чтобы сравнивать
+        let name = object.name.toLowerCase();
+        if (name.indexOf(query) == 0) {
+          newArr.push({
+            name: object.name,
+            country: object.country,
+            id: object.id
+          });
+        }
+      })
+      this.currentCityArr = newArr;
+    }
+    else{
+      this.currentCityArr = [];
+    }
+
+  }
+
+  getCurrentWeather(cityObj) {
+    console.log(cityObj.id);
+
+    let BASIC_URL = environment.BASIC_URL;
+    let APP_ID = environment.APP_ID;
+    let ID = cityObj.id;
+    let REQUEST = BASIC_URL + ID + APP_ID;
+    this.cityService.getData(REQUEST).subscribe(
+      data => console.log(data),
+      error => console.log(error),
+      () => console.log('Complete')
+    )
+  }
+
+  getForecast(cityObj) {
+    let BASIC_URL = environment.BASIC_URL_FORECAST;
+    let APP_ID = environment.APP_ID;
+    let ID = cityObj.id;
+    let REQUEST = BASIC_URL + ID + APP_ID;
+    this.cityService.getData(REQUEST).subscribe(
+      data => console.log(data),
+      error => console.log(error),
+      () => console.log('Complete')
+    )
   }
 
   ngOnInit() {
@@ -48,5 +86,5 @@ export class CitySearchComponent implements OnInit {
     )
     // this.findCity('La', this.cityArr);
   }
-    
+
 }

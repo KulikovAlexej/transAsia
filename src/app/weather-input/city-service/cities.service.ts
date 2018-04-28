@@ -20,14 +20,13 @@ export class CityService {
 
     }
 
-    // getData() {
-    //     return this._http.get('/assets/data/cities.json')
-    //         .map(res => res.json());
-    // }
+    
+
+
     getData(query): Observable<any> {
         return this._http.get(query)
             .map((response: Response) => {
-                console.log(response.json());
+                // console.log(response.json());
                 return response.json();
             }
         )

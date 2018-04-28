@@ -1,5 +1,11 @@
-<input type="text" [(ngModel)]='city' placeholder='Input city'>
-<button (click) = 'findCity("Laz", cityArr)'>Найти город</button>
+<input type="text" [(ngModel)]='cityStr' placeholder='Input city' (input)='findCity(cityStr, cityArr)'>
+<button (click) = 'findCity(cityStr, cityArr)'>Найти город</button>
+<p>Это текущий поиск: {{ cityStr }}</p>
+<div>
+  <p *ngFor='let city of currentCityArr' 
+      (click)='getCurrentWeather(city)'
+      (click)='getForecast(city)'> {{city.name}}, {{ city.country }}</p>
+</div>
 <!--<ul>
   <li *ngFor='let city of cityArr'>{{ city.name }} , {{ city.country }}</li>
 </ul>-->
