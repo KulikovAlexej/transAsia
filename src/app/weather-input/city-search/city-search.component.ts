@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import { CityService } from '../city-service/cities.service';
-import { environment } from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-city-search',
@@ -12,8 +12,7 @@ import { environment } from '../../../environments/environment'
   styleUrls: ['./city-search.component.css']
 })
 export class CitySearchComponent implements OnInit {
-  // query: string = "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cb30165fbee1109708d696ef9dfffd36"
-  // query: string = './assets/data/cities.json';
+
   query: string = './assets/data/city.list.json';
   cityStr: string = '';
   cityArr: Array<Object> = [];
@@ -23,10 +22,6 @@ export class CitySearchComponent implements OnInit {
 
   createArray(data) {
     this.cityArr = data;
-  }
-
-  test() {
-    console.log(this.cityStr);
   }
 
   findCity(str: string, arr: Array<any>) {
