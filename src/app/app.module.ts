@@ -10,14 +10,21 @@ import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { CityService } from './weather-input/city-service/cities.service';
+// import { CityService } from './weather-input/city-service/cities.service';
+import { DataService } from './data.service';
 import { CitySearchComponent } from './weather-input/city-search/city-search.component';
+import { CurrentWeatherCardComponent } from './weather-output/current-weather-card/current-weather-card.component';
+import { ForecastWeatherComponent } from './weather-output/forecast-weather/forecast-weather.component';
+import { LastCitiesListComponent } from './weather-output/last-cities-list/last-cities-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CitySearchComponent
+    CitySearchComponent,
+    CurrentWeatherCardComponent,
+    ForecastWeatherComponent,
+    LastCitiesListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +38,7 @@ import { CitySearchComponent } from './weather-input/city-search/city-search.com
     BrowserAnimationsModule,
     ReactiveFormsModule,
   ],
-  providers: [CityService],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
