@@ -1,2 +1,13 @@
 <button (click)='showWeather()'>Show weather</button>
-<p *ngIf='visibleFlag'> {{ cityWeather.name }}</p>
+
+<ng-container *ngIf='visibleFlag'>
+    <p>1Temperature {{ cityWeather.main.temp - 273 | number: '1.0-1' }}</p>
+    <p>1Pressure {{ cityWeather.main.pressure }} hPa</p>
+    <p>1Humidity {{ cityWeather.main.humidity }} %</p>
+    <p>1Wind {{ cityWeather.wind.speed }} m/s</p>
+    <p>0Wind {{ cityWeather.wind.deg }} degree</p>
+    <p>1Clouds {{ cityWeather.clouds.all }} %</p>
+    <p>1Icon {{ cityWeather.weather[0].icon }} %</p>
+    <p>1Decription {{ cityWeather.weather[0].description }} </p>
+    <img src="https://openweathermap.org/img/w/{{ cityWeather.weather[0].icon }}.png" alt="">
+</ng-container>
