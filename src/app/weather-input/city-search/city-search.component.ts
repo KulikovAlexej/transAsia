@@ -15,13 +15,23 @@ import { environment } from '../../../environments/environment';
 export class CitySearchComponent implements OnInit {
 
 
+  cityCtrl: FormControl;
+
+
   @Input()
   disableRipple: boolean = true;
 
   // query: string = './assets/data/city.list.json';
   cityStr: string = '';
   cityArr: Array<Object> = [];
-  currentCityArr: Array<Object> = [];
+  //ниже инициализировать бы просто классом, типо currentCityArr: City[] 
+  currentCityArr: Array<Object> = [
+    {
+      name: '',
+      country: '',
+      id: ''
+    }
+  ];
 
   @Output()
   citySelected: EventEmitter<Object> = new EventEmitter();
@@ -29,10 +39,10 @@ export class CitySearchComponent implements OnInit {
   sendCityObj(obj){
     this.citySelected.emit(obj)
   }
-  constructor() { }
-
-
-
+  
+  constructor() {
+    this.cityCtrl = new FormControl();
+  } 
 
   findCity(str: string, arr: Array<any>) {
     let query = str.toLowerCase();

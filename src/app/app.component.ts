@@ -23,11 +23,10 @@ export class AppComponent {
 
   createArray(data) {
     this.cityArr = data;
-    // надо передать этот массив в дочерний компонент citySearch, чтобы там уже формировался живой поиск
   }
 
   takeSelectedCity(city) {
-    // console.log(city);
+    console.log(city);
     this.selectedCity = city;
     this.getCurrentWeather(this.selectedCity);
     this.getForecast(this.selectedCity);
@@ -53,7 +52,7 @@ export class AppComponent {
     let ID = cityObj.id;
     let REQUEST = BASIC_URL + ID + APP_ID;
     this._dataService.getData(REQUEST).subscribe(
-      data => console.log(data),
+      data => this.currentForecast,
       error => console.log(error),
       // () => console.log('Complete')
     )

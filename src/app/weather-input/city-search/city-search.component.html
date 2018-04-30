@@ -1,9 +1,20 @@
-<input type="text" [(ngModel)]='cityStr' placeholder='Input city' (input)='findCity(cityStr, citiesArray)'>
-<button mat-button [disableRipple]='true'>Clicked me!</button>
-<button mat-raised-button [disableRipple]='true'>Clicked me!</button>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Choose a city" aria-label="Number" matInput 
+      [formControl]="cityCtrl" 
+      [matAutocomplete]="auto" 
+      [(ngModel)]='cityStr' 
+      (input)='findCity(cityStr, citiesArray)'>
+    <mat-autocomplete #auto="matAutocomplete">
+      <ng-container *ngIf='currentCityArr.length > 2'>
+        <mat-option 
+          *ngFor="let city of currentCityArr" 
+          [value]="city.name + ', ' + city.country"
+          (click)='sendCityObj(city)'>
+            {{ city.name }}, {{ city.country }}
+        </mat-option>
+      </ng-container>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
 
-
-<ul>
-  <li *ngFor='let city of currentCityArr' (click)='sendCityObj(city)'>{{ city.name }} , {{ city.country }}</li>
-</ul>
-<div>{{ currentCityArr.length }}</div>

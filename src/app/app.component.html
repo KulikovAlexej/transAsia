@@ -1,13 +1,10 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<h1>TransAsia testing task  {{ selectedCity.name }}</h1>
 <app-city-search 
   [citiesArray]='cityArr'
   (citySelected)='takeSelectedCity($event)'
 ></app-city-search>
 <app-current-weather-card
-  *ngIf='false'
+  *ngIf='true'
   [cityWeather]='currentWeather'
 ></app-current-weather-card>
-<button mat-button>Click me!</button>
 
 
