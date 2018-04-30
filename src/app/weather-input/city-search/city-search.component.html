@@ -1,14 +1,8 @@
 <input type="text" [(ngModel)]='cityStr' placeholder='Input city' (input)='findCity(cityStr, citiesArray)'>
-<!--<button (click) = 'findCity(cityStr, cityArr)'>Найти город</button>-->
-<button mat-button>Click me!</button>
+<button mat-button [disableRipple]='true'>Clicked me!</button>
+<button mat-raised-button [disableRipple]='true'>Clicked me!</button>
 
 
-<!--<p>Это текущий поиск: {{ cityStr }}</p>
-<div>
-  <p *ngFor='let city of currentCityArr' 
-      (click)='getCurrentWeather(city)'
-      (click)='getForecast(city)'> {{city.name}}, {{ city.country }}</p>
-</div>-->
 <ul>
   <li *ngFor='let city of currentCityArr' (click)='sendCityObj(city)'>{{ city.name }} , {{ city.country }}</li>
 </ul>

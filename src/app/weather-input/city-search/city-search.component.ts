@@ -14,6 +14,10 @@ import { environment } from '../../../environments/environment';
 })
 export class CitySearchComponent implements OnInit {
 
+
+  @Input()
+  disableRipple: boolean = true;
+
   // query: string = './assets/data/city.list.json';
   cityStr: string = '';
   cityArr: Array<Object> = [];
