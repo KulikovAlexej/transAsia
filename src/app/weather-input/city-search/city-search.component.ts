@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, Input, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
-// import { CityService } from '../city-service/cities.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -14,17 +13,12 @@ import { environment } from '../../../environments/environment';
 })
 export class CitySearchComponent implements OnInit {
 
-
-  cityCtrl: FormControl;
-
-
   @Input()
   disableRipple: boolean = true;
-
-  // query: string = './assets/data/city.list.json';
   cityStr: string = '';
   cityArr: Array<Object> = [];
-  //ниже инициализировать бы просто классом, типо currentCityArr: City[] 
+  cityCtrl: FormControl;
+  errorVisible: boolean = false;
   currentCityArr: Array<Object> = [
     {
       name: '',
@@ -39,6 +33,10 @@ export class CitySearchComponent implements OnInit {
   sendCityObj(obj){
     this.citySelected.emit(obj)
   }
+
+  test(){
+    console.log('keypress')
+  }
   
   constructor() {
     this.cityCtrl = new FormControl();
@@ -48,9 +46,9 @@ export class CitySearchComponent implements OnInit {
     let query = str.toLowerCase();
     let newArr: Array<any> = [];
     if (query.length > 2) {
-      console.log(123321);
       arr.forEach((object) => {
         //надо приводить все к маленьким буквам, чтобы сравнивать
+        // console.log('ЗАшел - значит больще 2 букв');
         let name = object.name.toLowerCase();
         if (name.indexOf(query) == 0) {
           newArr.push({
@@ -68,34 +66,18 @@ export class CitySearchComponent implements OnInit {
     
   }
 
-  // getCurrentWeather(cityObj) {
-  //   console.log(cityObj.id);
-
-  //   let BASIC_URL = environment.BASIC_URL;
-  //   let APP_ID = environment.APP_ID;
-  //   let ID = cityObj.id;
-  //   let REQUEST = BASIC_URL + ID + APP_ID;
-  //   this.cityService.getData(REQUEST).subscribe(
-  //     data => console.log(data),
-  //     error => console.log(error),
-  //     () => console.log('Complete')
-  //   )
-  // }
-
-  // getForecast(cityObj) {
-  //   let BASIC_URL = environment.BASIC_URL_FORECAST;
-  //   let APP_ID = environment.APP_ID;
-  //   let ID = cityObj.id;
-  //   let REQUEST = BASIC_URL + ID + APP_ID;
-  //   this.cityService.getData(REQUEST).subscribe(
-  //     data => console.log(data),
-  //     error => console.log(error),
-  //     () => console.log('Complete')
-  //   )
-  // }
-
   ngOnInit() {
 
   }
-// надо излучать событие, которое дойдет обратно до app.component
+
+  ngAfterContentChecked(){
+    // console.log(`length of str - ${this.cityStr}`)
+    //  console.log(`length of items - ${this.currentCityArr.length}`);
+     if( this.cityStr.length > 2 && this.currentCityArr.length < 2){
+       this.errorVisible = true
+     }
+     else{
+       this.errorVisible = false
+     }
+  }
 }
