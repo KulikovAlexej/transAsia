@@ -4,13 +4,13 @@ import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/cor
   selector: 'app-current-weather-card',
   templateUrl: './current-weather-card.component.html',
   styleUrls: ['./current-weather-card.component.css'],
-  // inputs: ['cityWeather']
 })
 export class CurrentWeatherCardComponent implements OnInit, OnChanges {
   @Input()
   cityWeather: Object;
 
-  visibleCard: boolean = false;
+  visibleFlag: boolean = false;
+
 
   
 
@@ -23,24 +23,19 @@ export class CurrentWeatherCardComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.visibleCard)
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    function detectedEmptyInput( inputName ){
-      if( changes[inputName].currentValue != undefined ) {
-        // this.visibleCard = true;
-      }
-      else{
-        // console.log(this.visibleCard, 123)
-        // this.visibleCard = false;
-      }
-      console.log(changes[inputName].currentValue)
+    // console.log(changes['cityWeather'].currentValue);
+    if(changes['cityWeather'].currentValue != undefined){
+      this.visibleFlag = true;
     }
-    // detectedEmptyInput('cityWeather');
-    console.log('ngChanges');
+    else{
+      this.visibleFlag = false;
+    }
     
-    
+    // console.log(this.visibleFlag)
   }
 
 }
