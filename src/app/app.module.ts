@@ -7,6 +7,10 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -35,8 +39,12 @@ import { LastCitiesListComponent } from './weather-output/last-cities-list/last-
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatDividerModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

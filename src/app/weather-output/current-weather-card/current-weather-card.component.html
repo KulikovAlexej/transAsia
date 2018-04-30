@@ -1,13 +1,26 @@
-<button (click)='showWeather()'>Show weather</button>
+<!--<p *ngIf='visibleFlag'>{{ cityWeather.name }}, {{ cityWeather.sys.country }}</p>-->
+<mat-card class="example-card" *ngIf='visibleFlag'>
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image">
+            <img src="https://openweathermap.org/img/w/{{ cityWeather.weather[0].icon }}.png" alt="">
+        </div>
+        <mat-card-title>{{ cityWeather.weather[0].description }}</mat-card-title>
+        <mat-card-subtitle>{{ cityWeather.main.temp - 273 | number: '1.0-1' }} Degree</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>More info</h4>   
+                    </mat-panel-title>  
+                </mat-expansion-panel-header>
+                <p>Wind {{ cityWeather.wind.speed }} m/s</p>
+                <p>Humidity {{ cityWeather.main.humidity }}%</p>
+                <p>Pressure {{ cityWeather.main.pressure }} hPa</p>
+                <p>Clouds {{ cityWeather.clouds.all }}%</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-content>
+</mat-card>
 
-<ng-container *ngIf='visibleFlag'>
-    <p>1Temperature {{ cityWeather.main.temp - 273 | number: '1.0-1' }}</p>
-    <p>1Pressure {{ cityWeather.main.pressure }} hPa</p>
-    <p>1Humidity {{ cityWeather.main.humidity }} %</p>
-    <p>1Wind {{ cityWeather.wind.speed }} m/s</p>
-    <p>0Wind {{ cityWeather.wind.deg }} degree</p>
-    <p>1Clouds {{ cityWeather.clouds.all }} %</p>
-    <p>1Icon {{ cityWeather.weather[0].icon }} %</p>
-    <p>1Decription {{ cityWeather.weather[0].description }} </p>
-    <img src="https://openweathermap.org/img/w/{{ cityWeather.weather[0].icon }}.png" alt="">
-</ng-container>

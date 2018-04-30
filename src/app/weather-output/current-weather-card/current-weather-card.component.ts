@@ -9,6 +9,7 @@ export class CurrentWeatherCardComponent implements OnInit, OnChanges {
   @Input()
   cityWeather: Object;
 
+  panelOpenState: boolean = false;
   visibleFlag: boolean = false;
 
 

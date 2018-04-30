@@ -1,10 +1,9 @@
-<app-city-search 
-  [citiesArray]='cityArr'
-  (citySelected)='takeSelectedCity($event)'
-></app-city-search>
-<app-current-weather-card
-  *ngIf='true'
-  [cityWeather]='currentWeather'
-></app-current-weather-card>
-
-
+<div class="wrapper">
+  <app-city-search 
+    *ngIf='true' 
+    [citiesArray]='cityArr' 
+    (citySelected)='takeSelectedCity($event)'></app-city-search>
+  <app-current-weather-card 
+    *ngIf='true' 
+    [cityWeather]='currentWeather'></app-current-weather-card>
+</div>
