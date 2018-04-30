@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { DataService } from './data.service';
 import { environment } from '../environments/environment';
 @Component({
@@ -65,5 +65,6 @@ export class AppComponent {
       () => console.log('Complete')
     )
   }
+
 }
 /// Кинуть сюда все данные от сервиса
