@@ -12,9 +12,12 @@ import { environment } from '../../../environments/environment';
   inputs: ['citiesArray']
 })
 export class CitySearchComponent implements OnInit {
+  
+  citiesArray: Array<any> = [];
 
   @Input()
   disableRipple: boolean = true;
+
   cityStr: string = '';
   cityArr: Array<Object> = [];
   cityCtrl: FormControl;
