@@ -10,6 +10,7 @@
         <mat-option 
           *ngFor="let city of currentCityArr" 
           [value]="city.name + ', ' + city.country"
+          (onSelectionChange)='sendCityObj(city)'
           (click)='sendCityObj(city)'>
             {{ city.name }}, {{ city.country }}
         </mat-option>

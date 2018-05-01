@@ -30,6 +30,8 @@ export class CitySearchComponent implements OnInit {
   @Output()
   citySelected: EventEmitter<Object> = new EventEmitter();
 
+  // @Output()
+  // optionSelected: EventEmitter<MatAutocompleteSelectedEvent> = new EventEmitter();
   sendCityObj(obj){
     this.citySelected.emit(obj)
   }
@@ -50,13 +52,18 @@ export class CitySearchComponent implements OnInit {
         //надо приводить все к маленьким буквам, чтобы сравнивать
         // console.log('ЗАшел - значит больще 2 букв');
         let name = object.name.toLowerCase();
-        if (name.indexOf(query) == 0) {
+        let country = object.country.toUpperCase();
+        let readyString = name;
+        if (readyString.indexOf(query) == 0) {
           newArr.push({
             name: object.name,
             country: object.country,
             id: object.id
           });
         }
+        // else if (readyString.indexOf(query) == -1){
+        //   console.log('ne sovpalo')
+        // }
       })
       this.currentCityArr = newArr;
     }
@@ -66,13 +73,15 @@ export class CitySearchComponent implements OnInit {
     
   }
 
+  sortCity(number){
+    console.log(this.cityStr.toLowerCase() + " - " + number)
+  }
+
   ngOnInit() {
 
   }
 
   ngAfterContentChecked(){
-    // console.log(`length of str - ${this.cityStr}`)
-    //  console.log(`length of items - ${this.currentCityArr.length}`);
      if( this.cityStr.length > 2 && this.currentCityArr.length < 2){
        this.errorVisible = true
      }
