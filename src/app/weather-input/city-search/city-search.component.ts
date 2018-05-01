@@ -19,74 +19,46 @@ export class CitySearchComponent implements OnInit {
   cityArr: Array<Object> = [];
   cityCtrl: FormControl;
   errorVisible: boolean = false;
-  currentCityArr: Array<Object> = [
-    {
-      name: '',
-      country: '',
-      id: ''
-    }
-  ];
+  currentCityArr: Array<Object> = [];
 
   @Output()
   citySelected: EventEmitter<Object> = new EventEmitter();
 
-  // @Output()
-  // optionSelected: EventEmitter<MatAutocompleteSelectedEvent> = new EventEmitter();
-  sendCityObj(obj){
+  sendCityObj(obj) {
     this.citySelected.emit(obj)
   }
 
-  test(){
-    console.log('keypress')
-  }
-  
   constructor() {
     this.cityCtrl = new FormControl();
-  } 
+  }
 
-  findCity(str: string, arr: Array<any>) {
-    let query = str.toLowerCase();
-    let newArr: Array<any> = [];
-    if (query.length > 2) {
-      arr.forEach((object) => {
-        //надо приводить все к маленьким буквам, чтобы сравнивать
-        // console.log('ЗАшел - значит больще 2 букв');
-        let name = object.name.toLowerCase();
-        let country = object.country.toUpperCase();
-        let readyString = name;
-        if (readyString.indexOf(query) == 0) {
-          newArr.push({
-            name: object.name,
-            country: object.country,
-            id: object.id
-          });
-        }
-        // else if (readyString.indexOf(query) == -1){
-        //   console.log('ne sovpalo')
-        // }
+  sortCity(searchStr: string, fullArray: Array<any>) {
+
+    if (searchStr.length > 2) {
+      searchStr = searchStr.toLowerCase(); 
+      this.currentCityArr = fullArray.filter((item) => {
+        const city = item.name.toLowerCase();
+        const country = item.country.toLowerCase();
+        const request = city + ", " + country;
+        return request.indexOf(searchStr) === 0;
       })
-      this.currentCityArr = newArr;
     }
-    else{
+    else {
       this.currentCityArr = [];
     }
-    
-  }
-
-  sortCity(number){
-    console.log(this.cityStr.toLowerCase() + " - " + number)
-  }
-
-  ngOnInit() {
 
   }
 
-  ngAfterContentChecked(){
-     if( this.cityStr.length > 2 && this.currentCityArr.length < 2){
-       this.errorVisible = true
-     }
-     else{
-       this.errorVisible = false
-     }
+  ngOnInit() { }
+
+  ngAfterContentChecked() {
+    if (this.cityStr.length > 2 && this.currentCityArr.length === 0) {
+      this.errorVisible = true
+    }
+    else {
+      this.errorVisible = false
+    }
+    // console.log(this.currentCityArr, this.errorVisible)
   }
+  
 }

@@ -6,3 +6,12 @@
     width: 400px;
     margin: 50px auto;
 }
+
+@media screen and (max-width: 480px) {
+    .wrapper{
+        width: 90%;
+        margin: 50px auto;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}

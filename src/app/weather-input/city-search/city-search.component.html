@@ -4,19 +4,18 @@
       [formControl]="cityCtrl" 
       [matAutocomplete]="auto" 
       [(ngModel)]='cityStr' 
-      (input)='findCity(cityStr, citiesArray)'>
+      (input)='sortCity(cityStr, citiesArray)'>
     <mat-autocomplete #auto="matAutocomplete">
-      <ng-container *ngIf='currentCityArr.length > 2'>
+      <ng-container *ngIf='currentCityArr.length != 0'>
         <mat-option 
           *ngFor="let city of currentCityArr" 
           [value]="city.name + ', ' + city.country"
-          (onSelectionChange)='sendCityObj(city)'
-          (click)='sendCityObj(city)'>
+          (onSelectionChange)='sendCityObj(city)'>
             {{ city.name }}, {{ city.country }}
         </mat-option>
       </ng-container>
     </mat-autocomplete>
   </mat-form-field>
-  <p class='error' *ngIf='errorVisible'>Not found</p>
+  <p class='error' *ngIf='errorVisible'>Not found this city, try input again</p>
 </form>
 
